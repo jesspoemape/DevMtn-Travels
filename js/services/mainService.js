@@ -80,4 +80,32 @@ angular.module('devmtnTravel').service('mainSrv', function(){
 				price: 1722.12
 			},
 		]
+
+		this.getPackages = function(country) {
+			var filteredPackages = [];
+
+			if (country) {
+				for (var i = 0; i < this.packageInfo.length; i++) {
+				var p = this.packageInfo[i];
+				if (p.country === country) {
+					filteredPackages.push(p);
+				}
+			}
+			return filteredPackages;
+		}
+		else {
+			return this.packageInfo;
+		}
+			
+		}
+		this.getPackage = function(id) {
+			var package = {};
+			for (var i = 0; i < this.packageInfo.length; i++) {
+				var p = this.packageInfo[i];
+				if (p.id * 1 === id*1) {
+					package = Object.assign({}, {city: p.city, country: p.country})
+				}
+			}
+			return package;
+		}
 })
